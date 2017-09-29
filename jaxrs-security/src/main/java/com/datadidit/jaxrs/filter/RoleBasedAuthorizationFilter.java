@@ -23,6 +23,7 @@ public class RoleBasedAuthorizationFilter implements ContainerRequestFilter{
 		
 		System.out.println("===================================");
 		System.out.println("Principal: "+principal);
+		System.out.println("Is user in admin role: "+sc.isUserInRole("admin"));
 		System.out.println("Method: "+requestContext.getMethod());
 		System.out.println("URI: "+requestContext.getUriInfo().getPath());
 		System.out.println("===================================");
