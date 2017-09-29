@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>CXF Jetty Example</display-name>
+	<servlet>
+		<servlet-name>TestCXFApplication</servlet-name>
+		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+		<!-- Name of the resource -->
+		<init-param>
+			<param-name>jaxrs.serviceClasses</param-name>
+			<param-value>
+  	  			com.datadidit.cxf.rest.HelloResource      			        
+  			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jaxrs.providers</param-name>
+			<param-value>
+ 				com.datadidit.jaxrs.filter.RoleBasedAuthorizationFilter
+ 			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TestCXFApplication</servlet-name>
+		<url-pattern>/cxf/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Welcome File -->
+	
+	<!-- Security -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>Test Realm</realm-name>
+		<form-login-config>
+			<form-login-page>/login.html</form-login-page>
+			<form-error-page>/authfail.html</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+	<!-- http://www.eclipse.org/jetty/documentation/9.4.x/configuring-security-authentication.html -->
+	 <security-role>
+    	<role-name>**</role-name>
+  	</security-role>
+</web-app>
